@@ -1,0 +1,41 @@
+<html>
+<head>
+  <title>Live CSS Edit Options</title>
+  <link rel="stylesheet" type="text/css" href="options.css">
+  <script type="text/javascript" src="options.js"></script>
+</head>
+<body>
+
+<h1 data-message="optionsHeader">Live CSS Editor Options</h1>
+
+<fieldset>
+  <p><label for="keycode-string" data-message="optionsKeyCommandLabel">Key Command for opening the editor</label></p>
+  <p>This configuration is now handled by the Chrome Keyboard Shortcuts manager at the bottom of the extensions page: chrome://extensions.</p>
+</fieldset>
+
+<fieldset>
+  <p><label for="box-size-w" data-message="optionsBoxSizeLabel">Default Editor Box Size (WxH in px):</label></p>
+  <input type="text" id="box-size-w" placeholder="W">x<input type="text" id="box-size-h" placeholder="H">px
+</fieldset>
+
+<fieldset>
+  <p data-message="optionsWarnLabel">Warn before closing the editor:</p>
+  <input type="radio" name="warn" id="warn-yes"> <label for="warn-yes" data-message="optionsYes">Yes</label>
+  <input type="radio" name="warn" id="warn-no"> <label for="warn-no" data-message="optionsNo">No</label>
+</fieldset>
+
+<fieldset>
+  <p data-message="optionsSaveLabel">Save your css even when you reload or leave the page:</p>
+  <input type="radio" name="save" id="save-yes"> <label for="save-yes" data-message="optionsYes">Yes</label>
+  <input type="radio" name="save" id="save-no"> <label for="save-no" data-message="optionsNo">No</label>
+</fieldset>
+
+<fieldset>
+  <p data-message="optionsModifyLabel">Load the CSS you've written when you visit the page again:</p>
+  <input type="radio" name="modify" id="modify-yes"> <label for="modify-yes" data-message="optionsYes">Yes</label>
+  <input type="radio" name="modify" id="modify-no"> <label for="modify-no" data-message="optionsNo">No</label>
+</fieldset>
+
+<p><button id="save-button" data-message="optionsSaveButton">Save</button></p>
+</body>
+</html>
