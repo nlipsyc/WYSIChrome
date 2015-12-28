@@ -1,0 +1,38 @@
+{
+	"name": "WISYChrome",
+	"manifest_version": 2,
+	"version": "1",
+
+	"description": "A WISYWIG point and click CSS generator for Chrome", 
+
+	"icons": {
+		"16": "img/16.png",
+		"22": "img/22.png",
+		"24": "img/24.png",
+		"32": "img/32.png",
+		"48": "img/48.png"
+	},
+
+	"options_page": "option.html",
+	"background": { "page":"background.html" },
+
+	"browser_action": {
+		"default_icon": "img/16.png",
+		"default_title": "WISYChrome"
+	},
+
+	"web_accessible_resources": [
+		"img/header.png",
+		"img/body.png",
+		"img/list.png",
+		"img/footer.png",
+		"img/bullet.png"
+	],
+
+	"permissions": [
+		"tabs",
+		"http://*/*", 
+		"https://*/*",
+		"contextMenus"
+	] 
+}
