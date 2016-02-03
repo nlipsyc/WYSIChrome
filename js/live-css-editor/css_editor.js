@@ -1,7 +1,10 @@
 /*jslint browser: true, maxerr: 50, indent: 2 */
 
+console.log('css_editor.js loaded');
+
 var LiveCSSEditor = function (settings) {
   "use strict";
+
 
   settings = settings || { warn: true, save: true, modify: true, boxsize: null };
 
@@ -268,7 +271,7 @@ var LiveCSSEditor = function (settings) {
     </div> \
     <div id="LiveCSSEditor-pad"> \
       <div id="LiveCSSEditor-label">' + chrome.i18n.getMessage("editorTitle") + '</div> \
-      <textarea id="LiveCSSEditor-code"></textarea> \
+      <textarea id="LiveCSSEditor-code">' + WYSITags + '</textarea> \
     </div>\
     ';
   }

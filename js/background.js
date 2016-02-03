@@ -7,7 +7,6 @@
 * This source code is licensed under the GNU General Public License,
 * Version 2. See the file COPYING for more details.
 */
-
 var cssViewerLoaded              = false; 
 var cssCiewerContextMenusParent  = null;
 
@@ -23,6 +22,7 @@ chrome.runtime.onInstalled.addListener(function(details){
 */
 chrome.browserAction.onClicked.addListener(function(tab)
 {
+
 	if( tab.url.indexOf("https://chrome.google.com") === 0 || tab.url.indexOf("chrome://") === 0 )
 	{
 		alert( "CSSViewer doesn't work on Google Chrome webstore!" );
@@ -45,8 +45,8 @@ chrome.browserAction.onClicked.addListener(function(tab)
 		chrome.contextMenus.create( { "title": "element.simpleCssDefinition", contexts:["all"] , "parentId": cssCiewerContextMenusParent, "onclick": cssCiewerDebugElSimpleCssDefinition } );
 	}
 
-	chrome.tabs.executeScript(tab.id, {file:'js/cssviewer.js'});
-	chrome.tabs.insertCSS(tab.id, {file:'css/cssviewer.css'});
+	chrome.tabs.executeScript(tab.id, {file:'js/cssviewer.js, js/live-css-editor/css_editor.js'});
+	chrome.tabs.insertCSS(tab.id, {file:'css/cssviewer.css, js/live-css-editor/css_editor.css'});
 
 	cssViewerLoaded = true;
 });

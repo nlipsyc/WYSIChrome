@@ -1,6 +1,5 @@
 /*jslint browser: true, devel: true, maxerr: 50, indent: 2 */
 /*global chrome */
-
 (function () {
   "use strict";
 
@@ -75,6 +74,8 @@
 
   // Called when the user clicks on the browser action.
   chrome.browserAction.onClicked.addListener(function (tab) {
+    console.log('bg.js loaded');
+
     var url = tab.url;
 
     if (url.indexOf('chrome') === 0) {
