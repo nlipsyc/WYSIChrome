@@ -45,7 +45,13 @@ chrome.browserAction.onClicked.addListener(function(tab)
 		chrome.contextMenus.create( { "title": "element.simpleCssDefinition", contexts:["all"] , "parentId": cssCiewerContextMenusParent, "onclick": cssCiewerDebugElSimpleCssDefinition } );
 	}
 
+	chrome.tabs.executeScript(tab.id, {file:'js/CSSJSON/json2.js'});
+	chrome.tabs.executeScript(tab.id, {file:'js/CSSJSON/cssjson.js'});
+	chrome.tabs.executeScript(tab.id, {file:'js/CSSJSON/terra.js'});
 	chrome.tabs.executeScript(tab.id, {file:'js/cssviewer.js'});
+
+
+
 	chrome.tabs.insertCSS(tab.id, {file:'css/cssviewer.css'});
 
 	cssViewerLoaded = true;
