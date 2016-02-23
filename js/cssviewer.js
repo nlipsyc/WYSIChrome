@@ -975,12 +975,15 @@ function cssViewerCopyCssToConsole(type)
 	// also replace ", ." with " ."  NON REGEX
 
 function cSInfo(el){
-	var cSTemplate = terra;
+	var cSTemplate = terra,
+		lastSelector = el.match(/(\W\w+)$/);
 
-	return "this is the template" + cSTemplate;
+		console.log(lastSelector);
+
+	return cSTemplate.search(lastSelector[1]);
 }
 
-	if( 'parents' == type ) return console.log( "These are the parents", deepSelector(CSSViewer_element), "and this is the C&S info" , cSInfo(CSSViewer_element) );
+	if( 'parents' == type ) return console.log( "These are the parents", deepSelector(CSSViewer_element), "and this is the C&S info" , cSInfo(deepSelector(CSSViewer_element)) );
 	if( 'el' == type ) return console.log( CSSViewer_element );
 	if( 'id' == type ) return console.log( CSSViewer_element.id );
 	if( 'tagName' == type ) return console.log( CSSViewer_element.tagName );
