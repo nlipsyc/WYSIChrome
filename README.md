@@ -13,6 +13,3 @@ Copyright & License
 was created by GitHub user *miled* and is available at https://github.com/miled/cssviewer. *miled* adapted the extension from work done by *Nicolas Huon* as a [FireFox addon](https://addons.mozilla.org/en-US/firefox/addon/2104), but unfortunately, the original code source comes with NO SPECIFIC LICENSE or COPYRIGHT.
 
 *miled* attempted to contact Nicolas to ask for permission but to no avail, furthermore, the FireFox add-on seems abandoned since June 2008. Believing that *CSSViewer* is a great resource for web developers and web designers alike, *miled* made a CSSViewer port to Google Chrome on March 2010, and on February 2013, *miled* decided to release the code under the terms of the **[GNU GENERAL PUBLIC LICENSE Version 2](http://www.gnu.org/licenses/gpl-2.0.txt)** (GPLv2), so *Nicolas Huon*'s original work would benefit the whole world and remain free.  
-
-###live-css-editor
-was created by jhubert and released through a GPL version 2.  See the original at: https://github.com/jhubert/live-css-editor/.

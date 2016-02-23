@@ -189,7 +189,7 @@ var CSSViewer_hexa = new Array(
 /*
 ** Utils
 */
-console.log('cssviewer.js loaded');
+
 function GetCurrentDocument()
 {
 	return window.document;
