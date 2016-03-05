@@ -975,20 +975,36 @@ function cssViewerCopyCssToConsole(type)
 	// also replace ", ." with " ."  NON REGEX
 
 function cSInfo(el){
-	var cSTemplate = terraTemplate,
-		lastSelector = el.match(/(\s\S+){7}$/); //last word and wspace
-		
-		
-		if (lastSelector){
+	//console.log(CSSJSON.toJSON(terraTemplate));
+	
+	var cSTemplate = terraBody,
+		tpl = (CSSJSON.toJSON(terraBody)),
+		selectors;
+		selectors = el.match(/\.\w\S*/g);
+		console.log('SELECTORS', selectors);
+		console.log('tpl', tpl);
 
-		}
+		function scanTpl(tpl){
+            for(var key in tpl){
+                if (tpl.hasOwnProperty(key)){
+                    if(key.match(/\.loginContainerWrapper/g)){
+                    console.log('match', key, tpl[key].children);
+                    }
+                }
+            }
+        }
+        scanTpl(tpl.children);
+        //
+        //Pseudo code, still need to @todo make toArray for key
+        //Wait that makes no sense, it's coming in as JSON
+        //@todo noah+=sleep
+        //		noah-=coffee
+        //selectors.match(forEach(toArray(key)))
 
-		console.log("template", cSTemplate, "lastSelector", lastSelector);
-
-	return cSTemplate.search(lastSelector[0]);
+	//return cSTemplate.search(lastSelector[0]);
 }
 
-	if( 'parents' == type ) return console.log( "These are the parents", deepSelector(CSSViewer_element), "and this is the C&S info" , cSInfo(deepSelector(CSSViewer_element)) );
+	if( 'parents' == type ) return console.log( "This is the C&S info" , cSInfo(deepSelector(CSSViewer_element)) );
 	if( 'el' == type ) return console.log( CSSViewer_element );
 	if( 'id' == type ) return console.log( CSSViewer_element.id );
 	if( 'tagName' == type ) return console.log( CSSViewer_element.tagName );
