@@ -219,44 +219,44 @@ function DecToHex(nb)
 function RGBToHex(str)
 {
 	var start = str.search(/\(/) + 1;
-		var end = str.search(/\)/);
+	var end = str.search(/\)/);
 
-		str = str.slice(start, end);
+	str = str.slice(start, end);
 
-		var hexValues = str.split(', ');
-		var hexStr = '#'; 
+	var hexValues = str.split(', ');
+	var hexStr = '#'; 
 
-		for (var i = 0; i < hexValues.length; i++) {
-			hexStr += DecToHex(hexValues[i]);
-		}
-
-		if( hexStr == "#00000000" ){
-			hexStr = "#FFFFFF";
-		}
-
-		hexStr = '<span style="border: 1px solid #000000 !important;width: 8px !important;height: 8px !important;display: inline-block !important;background-color:'+ hexStr +' !important;"></span> ' + hexStr;
-
-		return hexStr;
+	for (var i = 0; i < hexValues.length; i++) {
+		hexStr += DecToHex(hexValues[i]);
 	}
 
-	function GetFileName(str)
-	{
-		var start = str.search(/\(/) + 1;
-			var end = str.search(/\)/);
+	if( hexStr == "#00000000" ){
+		hexStr = "#FFFFFF";
+	}
 
-			str = str.slice(start, end);
+	hexStr = '<span style="border: 1px solid #000000 !important;width: 8px !important;height: 8px !important;display: inline-block !important;background-color:'+ hexStr +' !important;"></span> ' + hexStr;
 
-			var path = str.split('/');
+	return hexStr;
+}
 
-			return path[path.length - 1];
-		}
+function GetFileName(str)
+{
+	var start = str.search(/\(/) + 1;
+	var end = str.search(/\)/);
 
-		function RemoveExtraFloat(nb)
-		{
-			nb = nb.substr(0, nb.length - 2);
+	str = str.slice(start, end);
 
-			return Math.round(nb) + 'px';
-		}
+	var path = str.split('/');
+
+	return path[path.length - 1];
+}
+
+function RemoveExtraFloat(nb)
+{
+	nb = nb.substr(0, nb.length - 2);
+
+	return Math.round(nb) + 'px';
+}
 
 /*
 * CSSFunc
@@ -958,61 +958,85 @@ function cssViewerCopyCssToConsole(type)
 
 		function getSelectors(el){ 
 			var selector = el.nodeName.toLowerCase();
-				if (el.id) {
-					selector += ' #' + el.id;
-				} 
-				else if (el.className){
+			if (el.id) {
+				selector += ' #' + el.id;
+			} 
+			if (el.className){
 					//@WHYSIChrome filtering out the hover classes, check what the output is, filter for '.'? ' '? just the straight word?
-				selector += ' .' + el.className.replace(/\s+hover|hover/g,"").replace(/\s+/g, " .");
+					selector += ' .' + el.className.replace(/\s+hover|hover/g,"").replace(/\s+/g, " .");
 				}
 
-			return selector;
-		}
+				return selector;
 
-	}
+			}
+
+		}
 
 	//@WISYChrome use this regesx to get rid of weird stuff   :not\(\.[^)]*\) 
 	// also replace ", ." with " ."  NON REGEX
 
-function cSInfo(el){
-	//console.log(CSSJSON.toJSON(terraTemplate));
-	
-	var cSTemplate = terraBody,
+	function cSInfo(el){
+		console.log(CSSJSON.toJSON(terraTemplate));
+
+		console.log('EL', el);
+
+		var cSTemplate = terraBody,
 		tpl = (CSSJSON.toJSON(terraBody)),
 		selectors;
 		selectors = el.match(/\.\w\S*/g);
-		console.log('SELECTORS', selectors);
-		console.log('tpl', tpl);
+		console.log('**Selectors from this page:**', selectors);
+		console.log('**Incoming template object**', tpl);
 
 		function scanTpl(tpl){
-            for(var key in tpl){
-                if (tpl.hasOwnProperty(key)){
-                    if(key.match(/\.loginContainerWrapper/g)){
-                    console.log('match', key, tpl[key].children);
-                    }
-                }
-            }
-        }
-        scanTpl(tpl.children);
+            for(var key in tpl){										//For each option in the template
+                if (tpl.hasOwnProperty(key) && key.match(/\.\w+/g)){	//That has classes
+
+                	var match = key.match(/\.\w+/g);					//Pull out the classes
+                	console.log('****Match***', match)
+                		// match = match.filter(							//Clean out the nulls
+                		// 			function(n){ 
+                		// 			return n != null 
+                		// 		}); 
+                	for (var i = match.length - 1; i >= 0; i--) {		//Itterate through each
+
+	               		console.log(i, 'atributes ', JSON.stringify(tpl[key].attributes));	//Log the C&S info
+
+                		for (var j=selectors.length - 1; j >= 0; j--)	//Itterate through each classes on page
+                			//console.log('ij', i, j, match[i], selectors[j]);
+                		if(match[i] == selectors[j]){
+                			console.log(j, "THIS IS A MATCH", match[i], selectors[j]);
+                		}
+                		else if ( match[i] != selectors[j] && j < 1){
+                			console.log('fail', j);								
+	                				i = -1;								//Escape outer loop
+	                			}           		             	
+
+                	}
+					  // console.log('key', key, 'match', key.match(/\.\w+/g), 'atributes ', JSON.stringify(tpl[key].attributes));
+
+					}
+				}
+			}
+			scanTpl(tpl.children);
         //
         //Pseudo code, still need to @todo make toArray for key
         //Wait that makes no sense, it's coming in as JSON
-        //@todo noah+=sleep
+        //@todo noah+=slee
         //		noah-=coffee
         //selectors.match(forEach(toArray(key)))
 
 	//return cSTemplate.search(lastSelector[0]);
 }
 
-	if( 'parents' == type ) return console.log( "This is the C&S info" , cSInfo(deepSelector(CSSViewer_element)) );
-	if( 'el' == type ) return console.log( CSSViewer_element );
-	if( 'id' == type ) return console.log( CSSViewer_element.id );
-	if( 'tagName' == type ) return console.log( CSSViewer_element.tagName );
-	if( 'className' == type ) return console.log( CSSViewer_element.className );
-	if( 'style' == type ) return console.log( CSSViewer_element.style ); 
-	if( 'cssText' == type ) return console.log( document.defaultView.getComputedStyle(CSSViewer_element, null).cssText );
-	if( 'getComputedStyle' == type ) return console.log( document.defaultView.getComputedStyle(CSSViewer_element, null) );
-	if( 'simpleCssDefinition' == type ) return console.log( CSSViewer_element_cssDefinition );
+if( 'parents' == type ) return console.log( "This is the C&S info" , cSInfo(deepSelector(CSSViewer_element)) );
+if( 'el' == type ) return console.log( CSSViewer_element );
+if( 'id' == type ) return console.log( CSSViewer_element.id );
+if( 'tagName' == type ) return console.log( CSSViewer_element.tagName );
+if( 'className' == type ) return console.log( CSSViewer_element.className );
+if( 'style' == type ) return console.log( CSSViewer_element.style ); 
+if( 'cssText' == type ) return console.log( document.defaultView.getComputedStyle(CSSViewer_element, null).cssText );
+if( 'getComputedStyle' == type ) return console.log( document.defaultView.getComputedStyle(CSSViewer_element, null) );
+if( 'simpleCssDefinition' == type ) return console.log( CSSViewer_element_cssDefinition );
 }
 
 /*
