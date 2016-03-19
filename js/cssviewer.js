@@ -978,39 +978,41 @@ function cssViewerCopyCssToConsole(type)
 	function cSInfo(el){
 		console.log(CSSJSON.toJSON(terraTemplate));
 
-		console.log('EL', el);
+		// console.log('EL', el);
 
 		var cSTemplate = terraBody,
 		tpl = (CSSJSON.toJSON(terraBody)),
-		selectors;
-		selectors = el.match(/\.\w\S*/g);
-		console.log('**Selectors from this page:**', selectors);
-		console.log('**Incoming template object**', tpl);
+		cursorClasses;
+		cursorClasses = el.match(/\.\w\S*/g);
+		console.log('*** Here are the classes for the the thing you clicked ***', cursorClasses);
+		// console.log('**Incoming template object**', tpl);
 
 		function scanTpl(tpl){
             for(var key in tpl){										//For each option in the template
                 if (tpl.hasOwnProperty(key) && key.match(/\.\w+/g)){	//That has classes
 
-                	var match = key.match(/\.\w+/g);					//Pull out the classes
-                	console.log('****Match***', match)
+                	var tplClasses = key.match(/\.\w+/g);					//Pull out the classes
+                	// console.log('****Tpl Classes***', tplClasses)
                 		// match = match.filter(							//Clean out the nulls
                 		// 			function(n){ 
                 		// 			return n != null 
                 		// 		}); 
-                	for (var i = match.length - 1; i >= 0; i--) {		//Itterate through each
+                	for (var i = tplClasses.length - 1; i >= 0; i--) {		//Itterate through each
 
-	               		console.log(i, 'atributes ', JSON.stringify(tpl[key].attributes));	//Log the C&S info
 
-                		for (var j=selectors.length - 1; j >= 0; j--)	//Itterate through each classes on page
-                			//console.log('ij', i, j, match[i], selectors[j]);
-                		if(match[i] == selectors[j]){
-                			console.log(j, "THIS IS A MATCH", match[i], selectors[j]);
+                		for (var j=cursorClasses.length - 1; j >=0 ; j--){	//Itterate through each classes on page
+                			if (tplClasses[i] == cursorClasses[j]){
+                				// console.log('MATCH ON ', tplClasses, tplClasses[i]);
+                				break;
+                			}
+                			else if (j == 0){
+                				// console.log('Apararent lack of match on', tplClasses[i], cursorClasses[j])
+                				i = -1; 								//Abandon this tpl
+                			}
+                		}           		             	
+                		if (i==0){
+                			console.log('*** FULL MATCH found on ' + key, tpl[key], ' ***');
                 		}
-                		else if ( match[i] != selectors[j] && j < 1){
-                			console.log('fail', j);								
-	                				i = -1;								//Escape outer loop
-	                			}           		             	
-
                 	}
 					  // console.log('key', key, 'match', key.match(/\.\w+/g), 'atributes ', JSON.stringify(tpl[key].attributes));
 
@@ -1027,6 +1029,8 @@ function cssViewerCopyCssToConsole(type)
 
 	//return cSTemplate.search(lastSelector[0]);
 }
+
+if( 'coloursAndSmiles' == type) return  cSInfo(deepSelector(CSSViewer_element));
 
 if( 'parents' == type ) return console.log( "This is the C&S info" , cSInfo(deepSelector(CSSViewer_element)) );
 if( 'el' == type ) return console.log( CSSViewer_element );
