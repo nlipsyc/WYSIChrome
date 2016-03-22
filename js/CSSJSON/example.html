@@ -32,15 +32,7 @@
     	    console.log('\n\n');
 	    }
 
-        function scanTpl(tpl){
-            for(var key in tpl){
-                if (tpl.hasOwnProperty(key)){
-                    if(key.match(/\.loginContainerWrapper/g)){
-                    console.log('match', key, tpl[key]);
-                    }
-                }
-            }
-        }
+        
         scanTpl(json.children);
 
         document.write('<strong>JSON</strong><br/><pre>'+JSON.stringify(json, undefined, 2)+'</pre>');

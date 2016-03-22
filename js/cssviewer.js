@@ -980,8 +980,8 @@ function cssViewerCopyCssToConsole(type)
 
 		// console.log('EL', el);
 
-		var cSTemplate = terraBody,
-		tpl = (CSSJSON.toJSON(terraBody)),
+		var cSTemplate = treehouseBody,
+		tpl = (CSSJSON.toJSON(cSTemplate)),
 		cursorClasses;
 		cursorClasses = el.match(/\.\w\S*/g);
 		console.log('*** Here are the classes for the the thing you clicked ***', cursorClasses);
@@ -1011,7 +1011,7 @@ function cssViewerCopyCssToConsole(type)
                 			}
                 		}           		             	
                 		if (i==0){
-                			console.log('*** FULL MATCH found on ' + key, tpl[key], ' ***');
+                			window.alert('*** FULL MATCH found on ' + key, tpl[key], ' ***');
                 		}
                 	}
 					  // console.log('key', key, 'match', key.match(/\.\w+/g), 'atributes ', JSON.stringify(tpl[key].attributes));
