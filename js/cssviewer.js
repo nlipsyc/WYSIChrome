@@ -976,16 +976,14 @@ function cssViewerCopyCssToConsole(type)
 	// also replace ", ." with " ."  NON REGEX
 
 	function cSInfo(el){
-		console.log(CSSJSON.toJSON(terraTemplate));
-
+	
 		// console.log('EL', el);
 
 		var cSTemplate = treehouseBody,
 		tpl = (CSSJSON.toJSON(cSTemplate)),
-		cursorClasses;
+		cursorClasses,
+		alertText = ['--Hit shift+ctrl+i to view this in the console--'];
 		cursorClasses = el.match(/\.\w\S*/g);
-		console.log('*** Here are the classes for the the thing you clicked ***', cursorClasses);
-		// console.log('**Incoming template object**', tpl);
 
 		function scanTpl(tpl){
             for(var key in tpl){										//For each option in the template
@@ -1011,7 +1009,11 @@ function cssViewerCopyCssToConsole(type)
                 			}
                 		}           		             	
                 		if (i==0){
-                			window.alert('*** FULL MATCH found on ' + key, tpl[key], ' ***');
+                			alertText.push('***** Selector(s) found *****\n' + key + '\n***** Options bellow *****');
+                			for (atr in tpl[key].attributes){
+ 	                			alertText.push('To change ' + atr + ':\ngo to ' + tpl[key].attributes[atr]);
+                			}
+
                 		}
                 	}
 					  // console.log('key', key, 'match', key.match(/\.\w+/g), 'atributes ', JSON.stringify(tpl[key].attributes));
@@ -1020,14 +1022,8 @@ function cssViewerCopyCssToConsole(type)
 				}
 			}
 			scanTpl(tpl.children);
-        //
-        //Pseudo code, still need to @todo make toArray for key
-        //Wait that makes no sense, it's coming in as JSON
-        //@todo noah+=slee
-        //		noah-=coffee
-        //selectors.match(forEach(toArray(key)))
-
-	//return cSTemplate.search(lastSelector[0]);
+			console.log(alertText);
+			window.alert(alertText.join('\n'));
 }
 
 if( 'coloursAndSmiles' == type) return  cSInfo(deepSelector(CSSViewer_element));

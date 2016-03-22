@@ -6,11 +6,11 @@
 	"description": "A WISYWIG point and click CSS generator for Chrome", 
 
 	"icons": {
-		"16": "img/16.png",
-		"22": "img/22.png",
-		"24": "img/24.png",
-		"32": "img/32.png",
-		"48": "img/48.png"
+		"16": "img/waFavicon.png",
+		"22": "img/waFavicon.png",
+		"24": "img/waFavicon.png",
+		"32": "img/waFavicon.png",
+		"48": "img/waFavicon.png"
 	},
 
 	"options_page": "option.html",
