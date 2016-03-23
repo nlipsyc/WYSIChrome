@@ -978,11 +978,14 @@ function cssViewerCopyCssToConsole(type)
 	function cSInfo(el){
 	
 		// console.log('EL', el);
-
-		var cSTemplate = treehouseBody,
-		tpl = (CSSJSON.toJSON(cSTemplate)),
+		console.log("This be the templates", cSTemplates);
+		var tpl = {},
 		cursorClasses,
 		alertText = ['--Hit shift+ctrl+i to view this in the console--'];
+		for (template in cSTemplates){
+			tpl[template] = CSSJSON.toJSON(cSTemplates[template]);
+			//console.log(tpl);
+		}
 		cursorClasses = el.match(/\.\w\S*/g);
 
 		function scanTpl(tpl){
@@ -1021,7 +1024,12 @@ function cssViewerCopyCssToConsole(type)
 					}
 				}
 			}
-			scanTpl(tpl.children);
+			
+			for (template in tpl){
+			console.log('template', tpl, 'template.children new', cSTemplates[template].children);
+			alertText.push('      -/|\\-/|\\-/|\\-/|\\- ' + template + ' -/|\\-/|\\-/|\\-/|\\-')
+			scanTpl(tpl[template].children);
+		}
 			console.log(alertText);
 			window.alert(alertText.join('\n'));
 }

@@ -48,9 +48,9 @@ chrome.browserAction.onClicked.addListener(function(tab)
 	}
 
 	chrome.tabs.executeScript(tab.id, {file:'js/CSSJSON/json2.js'});
-	chrome.tabs.executeScript(tab.id, {file:'js/cssTemplate/cssTemplate_Terra.js'});
+	// chrome.tabs.executeScript(tab.id, {file:'js/cssTemplate/cssTemplate_Terra.js'});
 	chrome.tabs.executeScript(tab.id, {file:'js/CSSJSON/cssjson.js'});
-	chrome.tabs.executeScript(tab.id, {file:'js/CSSJSON/terra.js'});
+	chrome.tabs.executeScript(tab.id, {file:'js/CSSJSON/cSTemplates.js'});
 	chrome.tabs.executeScript(tab.id, {file:'js/cssviewer.js'});
 
 	chrome.tabs.insertCSS(tab.id, {file:'css/cssviewer.css'});

@@ -1,9 +1,9 @@
 {
-	"name": "WISYChrome",
+	"name": "Colours and Smiles",
 	"manifest_version": 2,
 	"version": "1",
 
-	"description": "A WISYWIG point and click CSS generator for Chrome", 
+	"description": "Where did they hide that Colors and styles option?", 
 
 	"icons": {
 		"16": "img/waFavicon.png",
