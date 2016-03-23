@@ -1,7 +1,7 @@
 {
 	"name": "Colours and Smiles",
 	"manifest_version": 2,
-	"version": "1",
+	"version": "0.2",
 
 	"description": "Where did they hide that Colors and styles option?", 
 
@@ -13,7 +13,6 @@
 		"48": "img/waFavicon.png"
 	},
 
-	"options_page": "option.html",
 	"background": { "page":"background.html" },
 
 	"browser_action": {

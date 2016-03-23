@@ -978,19 +978,19 @@ function cssViewerCopyCssToConsole(type)
 	function cSInfo(el){
 	
 		// console.log('EL', el);
-		console.log("This be the templates", cSTemplates);
 		var tpl = {},
 		cursorClasses,
-		alertText = ['--Hit shift+ctrl+i to view this in the console--'];
+		alertText = ['--Hit shift+ctrl+i to view this in the console--'],
+		matches = {};
 		for (template in cSTemplates){
 			tpl[template] = CSSJSON.toJSON(cSTemplates[template]);
-			//console.log(tpl);
 		}
 		cursorClasses = el.match(/\.\w\S*/g);
 
-		function scanTpl(tpl){
-            for(var key in tpl){										//For each option in the template
-                if (tpl.hasOwnProperty(key) && key.match(/\.\w+/g)){	//That has classes
+		function scanTpl(template){
+            var currentTpl = tpl[template].children;
+            for(var key in currentTpl){										//For each option in the template
+                if (currentTpl.hasOwnProperty(key) && key.match(/\.\w+/g)){	//That has classes
 
                 	var tplClasses = key.match(/\.\w+/g);					//Pull out the classes
                 	// console.log('****Tpl Classes***', tplClasses)
@@ -1013,8 +1013,17 @@ function cssViewerCopyCssToConsole(type)
                 		}           		             	
                 		if (i==0){
                 			alertText.push('***** Selector(s) found *****\n' + key + '\n***** Options bellow *****');
-                			for (atr in tpl[key].attributes){
- 	                			alertText.push('To change ' + atr + ':\ngo to ' + tpl[key].attributes[atr]);
+                			for (atr in currentTpl[key].attributes){
+ 	                			
+                				//This bit was for implementing an alert box that delivered the info.  Now deprecated
+ 	                			alertText.push('To change ' + atr + ':\ngo to ' + currentTpl[key].attributes[atr]);
+ 	                			//End deprecated
+
+ 	                			//For logging results to console as objects
+        						matches[template] = {};
+
+ 	                			matches[template][atr] = currentTpl[key]["attributes"][atr];
+
                 			}
 
                 		}
@@ -1026,12 +1035,18 @@ function cssViewerCopyCssToConsole(type)
 			}
 			
 			for (template in tpl){
-			console.log('template', tpl, 'template.children new', cSTemplates[template].children);
+		//	console.log('template', tpl, 'template.children new', cSTemplates[template].children);
 			alertText.push('      -/|\\-/|\\-/|\\-/|\\- ' + template + ' -/|\\-/|\\-/|\\-/|\\-')
-			scanTpl(tpl[template].children);
+
+			scanTpl(template);
+
 		}
-			console.log(alertText);
-			window.alert(alertText.join('\n'));
+
+		console.log('-/|\\-/|\\-/|\\-/|\\- Colours and Smiles -/|\\-/|\\-/|\\-/|\\-', matches);	
+
+		// console.log(alertText); 								
+		//	window.alert(alertText.join('\n'));							Alert text was too long to fit.  Comment back in if you decide to go with "select a theme -> alert" flow
+
 }
 
 if( 'coloursAndSmiles' == type) return  cSInfo(deepSelector(CSSViewer_element));
