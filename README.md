@@ -33,7 +33,7 @@ Copyright & License
 
 *Colours and Smiles* is released under the GNU GENERAL PUBLIC LICENSE Version 2.
 
-*Colours and Smiles* incorporates two other Chrome extensions, both are also released under the GNU GENERAL PUBLIC LICENSE Version 2. 
+*Colours and Smiles* incorporates another plugin released under the GNU GENERAL PUBLIC LICENSE Version 2. 
 
 ###CSSViewer 1.4 
 was created by GitHub user *miled* and is available at https://github.com/miled/cssviewer. *miled* adapted the extension from work done by *Nicolas Huon* as a [FireFox addon](https://addons.mozilla.org/en-US/firefox/addon/2104), but unfortunately, the original code source comes with NO SPECIFIC LICENSE or COPYRIGHT.
